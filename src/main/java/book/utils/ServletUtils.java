@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * @author wangwei
- * 2022/09/03 16:07
+ * @author fanhongtao
+ * 2022/10/13 15:35
  *
  * 封装原生request和response的一些处理逻辑
  */

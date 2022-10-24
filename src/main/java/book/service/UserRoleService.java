@@ -1,7 +1,11 @@
 package book.service;
 
-import book.entity.UserRole;
+import book.entity.Role;
 import com.baomidou.mybatisplus.extension.service.IService;
 
-public interface UserRoleService extends IService<UserRole> {
+/**
+ * @author fanhongtao
+ * 2022/10/13 15:32
+ */
+public interface UserRoleService extends IService<Role> {
 }

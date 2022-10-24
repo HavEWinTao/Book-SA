@@ -18,9 +18,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author wangwei
- * @version 1.0.0
- * 2022/09/03 16:07
+ * @author fanhongtao
+ * 2022/10/13 15:33
  * @description: 更改默认/error处理机制，不返回默认白页
  */
 @Controller

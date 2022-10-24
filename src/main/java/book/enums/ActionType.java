@@ -1,5 +1,9 @@
 package book.enums;
 
+/**
+ * @author fanhongtao
+ * 2022/10/12 15:29
+ */
 public enum ActionType {
     INSERT(1),
     UPDATE(2),

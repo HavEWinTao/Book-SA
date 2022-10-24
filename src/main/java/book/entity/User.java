@@ -5,6 +5,10 @@ import lombok.Data;
 
 import java.io.Serializable;
 
+/**
+ * @author fanhongtao
+ * 2022/10/12 15:29
+ */
 @Data
 @TableName("u_user")
 public class User implements Serializable {
@@ -12,7 +16,13 @@ public class User implements Serializable {
     @TableId(value = "user_id", type = IdType.AUTO)
     private Integer userId;
 
-    private String userName;
+    private String userName;//用户名
+
     @TableField(value = "password")
-    private String hashedPassword;
+    private String hashedPassword;//加密后的密码
+
+    private int age;//年龄
+    private String sex;//性别
+
+    private String phone;//电话
 }

@@ -16,6 +16,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * @author fanhongtao
+ * 2022/10/13 15:32
+ */
 @Service
 public class UserLogServiceImpl extends ServiceImpl<UserLogMapper, UserLog> implements UserLogService {
 

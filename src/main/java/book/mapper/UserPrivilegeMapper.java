@@ -1,7 +1,11 @@
 package book.mapper;
 
-import book.entity.UserPrivilege;
+import book.entity.Privilege;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
-public interface UserPrivilegeMapper extends BaseMapper<UserPrivilege> {
+/**
+ * @author fanhongtao
+ * 2022/10/13 15:32
+ */
+public interface UserPrivilegeMapper extends BaseMapper<Privilege> {
 }

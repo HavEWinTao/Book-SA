@@ -6,9 +6,7 @@ import book.service.UserRolesPrivilegeService;
 import book.service.UserService;
 import book.service.UsersRoleService;
 import book.vo.UserReqData;
-import book.entity.*;
 import book.enums.ActionType;
-import book.service.*;
 import book.utils.ResultBody;
 import book.utils.UserUtils;
 import cn.hutool.crypto.digest.BCrypt;
@@ -24,6 +22,10 @@ import static book.utils.UserUtils.sessionStatusKey;
 
 // https://github.com/spring-projects/spring-session/blob/main/spring-session-jdbc/src/main/resources/org/springframework/session/jdbc/schema-mysql.sql
 
+/**
+ * @author fanhongtao
+ * 2022/10/13 21:42
+ */
 @RestController
 @RequestMapping("/book/user")
 public class UserController {
@@ -49,9 +51,9 @@ public class UserController {
             return ResultBody.error(HttpStatus.BAD_REQUEST.value(), "用户名或密码错误");
         }
         UsersRole usersRole = usersRoleService.getByUserId(user.getUserId());
-        UserRole role = userRoleService.getById(usersRole.getRoleId());
-        List<UserPrivilege> privileges = userRolesPrivilegeService.getPrivilegesByRoleId(role.getRoleId());
-        UserPrivilege[] privilegeArr = new UserPrivilege[privileges.size()];
+        Role role = userRoleService.getById(usersRole.getRoleId());
+        List<Privilege> privileges = userRolesPrivilegeService.getPrivilegesByRoleId(role.getRoleId());
+        Privilege[] privilegeArr = new Privilege[privileges.size()];
         privileges.toArray(privilegeArr);
         UserStatus status = new UserStatus();
         status.setUserId(user.getUserId());
@@ -99,13 +101,13 @@ public class UserController {
 
     @GetMapping("/list")
     public ResultBody list(HttpSession session) {
-        UserUtils.checkPrivilege(UserPrivilege.PRI_EDIT, "用户无权限进行用户管理操作");
+        UserUtils.checkPrivilege(Privilege.PRI_EDIT, "用户无权限进行用户管理操作");
         return ResultBody.success(service.getList());
     }
 
     @PostMapping("/register")
     public ResultBody register(@RequestBody UserReqData vo, HttpSession session) {
-        UserUtils.checkPrivilege(UserPrivilege.PRI_EDIT, "用户无权限进行用户管理操作");
+        UserUtils.checkPrivilege(Privilege.PRI_EDIT, "用户无权限进行用户管理操作");
         service.register(vo);
         UserUtils.log(session, ActionType.INSERT, "新用户：" + vo.getUsername());
         return ResultBody.success("成功");
@@ -113,7 +115,7 @@ public class UserController {
 
     @DeleteMapping("/{id}")
     public ResultBody delete(@PathVariable("id") Integer id, HttpSession session) {
-        UserUtils.checkPrivilege(UserPrivilege.PRI_EDIT, "用户无权限进行用户管理操作");
+        UserUtils.checkPrivilege(Privilege.PRI_EDIT, "用户无权限进行用户管理操作");
         UserStatus status = (UserStatus) session.getAttribute(sessionStatusKey);
         if (status.getUserId().equals(id)) {
             return ResultBody.error(HttpStatus.FORBIDDEN.value(), "不能删除自己的账号");

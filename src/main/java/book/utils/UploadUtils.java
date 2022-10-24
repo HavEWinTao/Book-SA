@@ -10,8 +10,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 /**
- * @author wangwei
- * 2022/09/03 16:07
+ * @author fanhongtao
+ * 2022/10/13 15:36
  */
 public class UploadUtils {
 

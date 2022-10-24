@@ -8,6 +8,10 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * @author fanhongtao
+ * 2022/10/13 15:32
+ */
 @Service
 public class UsersRoleServiceImpl extends ServiceImpl<UsersRoleMapper, UsersRole> implements UsersRoleService {
     @Transactional

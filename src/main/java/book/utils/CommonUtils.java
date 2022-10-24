@@ -12,9 +12,8 @@ import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author wangwei
- * 2022/09/03 16:07
- * <p>
+ * @author fanhongtao
+ * 2022/10/13 15:34
  * 生成 一些字符串
  */
 public class CommonUtils {

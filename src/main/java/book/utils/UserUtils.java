@@ -1,10 +1,9 @@
 package book.utils;
 
 import book.entity.UserLog;
-import book.entity.UserPrivilege;
+import book.entity.Privilege;
 import book.entity.UserStatus;
 import book.service.UserLogService;
-import book.entity.*;
 import book.enums.ActionType;
 import book.exception.BasicException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +14,10 @@ import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.regex.*;
 
+/**
+ * @author fanhongtao
+ * 2022/10/13 15:32
+ */
 @Component
 public class UserUtils {
     public static final String sessionStatusKey = "userStatus";
@@ -35,8 +38,7 @@ public class UserUtils {
     }
 
     public static boolean isLoggedIn(HttpSession session) {
-        if (session.getAttribute(sessionStatusKey) == null) return false;
-        return true;
+        return session.getAttribute(sessionStatusKey) != null;
     }
     public static boolean isLoggedIn() {
         return httpSession.getAttribute(sessionStatusKey) != null;
@@ -49,7 +51,7 @@ public class UserUtils {
     public static void checkPrivilege(int privilegeId, String msg) {
         if (!isLoggedIn()) throw new BasicException(HttpStatus.UNAUTHORIZED.value(), "登录超时，请重新登录");
         UserStatus status = (UserStatus) httpSession.getAttribute(sessionStatusKey);
-        for (UserPrivilege privilege : status.getPrivileges()) {
+        for (Privilege privilege : status.getPrivileges()) {
             if (privilege.getPrivilegeId() != privilegeId) continue;
             return;
         }

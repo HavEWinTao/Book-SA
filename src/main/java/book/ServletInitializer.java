@@ -4,9 +4,8 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 /**
- * @author wangwei
- * 2021/10/31 16:56
- *
+ * @author fanhongtao
+ * 2022/10/13 15:36
  * 启动外部tomcat
  */
 public class ServletInitializer extends SpringBootServletInitializer {
@@ -15,5 +14,4 @@ public class ServletInitializer extends SpringBootServletInitializer {
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
         return application.sources(BookApplication.class);
     }
-
 }

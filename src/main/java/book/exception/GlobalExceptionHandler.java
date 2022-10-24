@@ -14,18 +14,14 @@ import javax.servlet.http.HttpServletRequest;
 
 
 /**
- * @author wangwei
- * 2022/09/03 16:07
+ * @author fanhongtao
+ * 2022/10/13 15:33
  */
 @Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    /**
-     * 自定义异常
-     * @param e
-     * @return
-     */
+    //自定义异常
     @ExceptionHandler(BasicException.class)
     public ResultBody handlerBasicException(BasicException e) {
         e.printStackTrace();
@@ -33,11 +29,7 @@ public class GlobalExceptionHandler {
     }
 
 
-    /**
-     * 处理 404
-     * @param e
-     * @return
-     */
+    //处理 404
     @ExceptionHandler(NoHandlerFoundException.class)
     public ResultBody handlerNoFoundException(NoHandlerFoundException e) {
         HttpServletRequest request = ServletUtils.getRequest();
@@ -46,9 +38,7 @@ public class GlobalExceptionHandler {
     }
 
 
-    /**
-     * 数据校验异常 ， 表单格式接收数据
-     */
+    //数据校验异常，表单格式接收数据
     @ExceptionHandler(BindException.class)
     public ResultBody validatedBindException(BindException e) {
         log.error(e.getMessage());
@@ -57,9 +47,7 @@ public class GlobalExceptionHandler {
     }
 
 
-    /**
-     * 数据校验异常， json 格式接收数据，@RequestBody 标注
-     */
+    //数据校验异常， json 格式接收数据，@RequestBody 标注
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResultBody validExceptionHandler(MethodArgumentNotValidException e) {
         log.error(e.getMessage());
@@ -67,11 +55,7 @@ public class GlobalExceptionHandler {
         return ResultBody.error(message);
     }
 
-    /**
-     * 其他异常
-     * @param e
-     * @return
-     */
+    //其他异常
     @ExceptionHandler(Exception.class)
     public ResultBody exceptionHandler(Exception e) {
         log.error("其他异常：{}", e);

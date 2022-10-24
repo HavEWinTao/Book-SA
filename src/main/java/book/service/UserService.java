@@ -7,6 +7,10 @@ import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
 
+/**
+ * @author fanhongtao
+ * 2022/10/13 15:32
+ */
 public interface UserService extends IService<User> {
     List<UserModelForList> getList();
     void register(UserReqData vo);

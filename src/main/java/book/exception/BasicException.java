@@ -3,10 +3,8 @@ package book.exception;
 import lombok.Data;
 
 /**
- * @author wangwei
- * @version 1.0.0
- * @date 2021/9/29 8:47
- * @description: TODO
+ * @author fanhongtao
+ * 2022/10/13 15:32
  */
 @Data
 public class BasicException extends RuntimeException {
@@ -19,5 +17,4 @@ public class BasicException extends RuntimeException {
         this.code = code;
         this.msg = msg;
     }
-
 }

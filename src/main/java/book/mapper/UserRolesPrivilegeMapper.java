@@ -1,7 +1,11 @@
 package book.mapper;
 
-import book.entity.UserRolesPrivilege;
+import book.entity.Role2Privilege;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
-public interface UserRolesPrivilegeMapper extends BaseMapper<UserRolesPrivilege> {
+/**
+ * @author fanhongtao
+ * 2022/10/13 15:32
+ */
+public interface UserRolesPrivilegeMapper extends BaseMapper<Role2Privilege> {
 }

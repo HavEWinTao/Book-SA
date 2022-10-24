@@ -5,8 +5,8 @@ import org.springframework.http.HttpStatus;
 import java.util.HashMap;
 
 /**
- * @author wangwei
- * 2022/09/03 16:07
+ * @author fanhongtao
+ * 2022/10/13 15:35
  *
  * 返回结果类
  */

@@ -8,9 +8,13 @@ import lombok.EqualsAndHashCode;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * @author fanhongtao
+ * 2022/10/12 15:29
+ */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@TableName("u_log")
+@TableName("user_log")
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserLog implements Serializable {
     private static final long serialVersionUID = 1L;

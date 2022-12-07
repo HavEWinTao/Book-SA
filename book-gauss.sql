@@ -1,9 +1,9 @@
-create database book owner fantastic;
+create database book owner fan;
 
 -- 以上在命令行中以omm用户执行
 
 -- 以下在data studio中以fantastic用户执行
-create schema book;
+create schema book authorization fan;
 
 set search_path to book;
 

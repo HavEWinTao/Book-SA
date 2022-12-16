@@ -1,3 +1,5 @@
+create user fan with password "SIsi04200521";
+
 create database book owner fan;
 
 -- 以上在命令行中以omm用户执行

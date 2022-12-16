@@ -17,7 +17,9 @@
     <modules>
         <module>bookdetail-service</module>
         <module>other-service</module>
+
         <module>common</module>
+        <module>book-service</module>
     </modules>
 
     <packaging>pom</packaging>

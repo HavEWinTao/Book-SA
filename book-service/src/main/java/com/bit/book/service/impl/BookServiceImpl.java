@@ -68,11 +68,6 @@ public class BookServiceImpl extends ServiceImpl<BookMapper, Book> implements Bo
     }
 
     @Override
-    public boolean subOne(Integer bookId) {
-        return this.baseMapper.subOne(bookId);
-    }
-
-    @Override
     @Transactional
     public int addAll(MultipartFile file) {
         int num = 0;

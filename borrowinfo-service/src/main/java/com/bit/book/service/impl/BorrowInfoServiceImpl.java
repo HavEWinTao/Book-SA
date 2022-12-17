@@ -1,12 +1,10 @@
 package com.bit.book.service.impl;
 
-import com.bit.book.entity.Book;
 import com.bit.book.entity.BorrowInfo;
 import com.bit.book.exception.BasicException;
 import com.bit.book.mapper.BorrowInfoMapper;
-import com.bit.book.service.BookService;
 import com.bit.book.service.BorrowInfoService;
-import com.bit.book.service.UserService;
+import com.bit.book.vo.BorrowInfoData;
 import com.bit.book.vo.BorrowInfoSearchData;
 import com.bit.book.vo.PageRspData;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
@@ -16,7 +14,6 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,12 +24,6 @@ import java.util.List;
  */
 @Service
 public class BorrowInfoServiceImpl extends ServiceImpl<BorrowInfoMapper, BorrowInfo> implements BorrowInfoService {
-
-    @Autowired
-    BookService bookService;
-
-    @Autowired
-    UserService userService;
 
     @Override
     public PageRspData<BorrowInfo> listByPage(Integer pageNum, Integer pageSize) {
@@ -59,32 +50,30 @@ public class BorrowInfoServiceImpl extends ServiceImpl<BorrowInfoMapper, BorrowI
     }
 
     @Override
-    public boolean borrowBook(Integer bookId, Integer userId) {
-        Boolean canBorrow = baseMapper.canBorrow(bookId);
+    public boolean borrowBook(BorrowInfoData borrowInfoData) {
+        Boolean canBorrow = baseMapper.canBorrow(borrowInfoData.getBookId());
         if (!canBorrow) {
             throw new BasicException(400, "图书数量不足");
         }
         LambdaQueryWrapper<BorrowInfo> wrapper = new LambdaQueryWrapper<>();
-        wrapper.eq(BorrowInfo::getBookId, bookId);
-        wrapper.eq(BorrowInfo::getUserId, userId);
+        wrapper.eq(BorrowInfo::getBookId, borrowInfoData.getBookId());
+        wrapper.eq(BorrowInfo::getUserId, borrowInfoData.getUserId());
         BorrowInfo borrowInfo = getOne(wrapper);
         if (borrowInfo != null) {
             throw new BasicException(400, "该用户已借该图书");
         }
         borrowInfo = new BorrowInfo();
-        borrowInfo.setUserId(userId);
-        String userName = userService.getById(userId).getUserName();
-        borrowInfo.setUserName(userName);
-        borrowInfo.setBookId(bookId);
-        String bookName = bookService.getById(bookId).getBookName();
-        borrowInfo.setBookName(bookName);
+        borrowInfo.setUserId(borrowInfoData.getUserId());
+        borrowInfo.setUserName(borrowInfoData.getUserName());
+        borrowInfo.setBookId(borrowInfoData.getBookId());
+        borrowInfo.setBookName(borrowInfoData.getBookName());
         //设置时间
         long now = System.currentTimeMillis();
         borrowInfo.setBorrowTime(now);
         long deadline = now + 1000L * 3600 * 24 * 30;
         borrowInfo.setDeadline(deadline);
         boolean flag = this.save(borrowInfo);
-        flag = flag && bookService.subOne(bookId);
+        flag = flag && baseMapper.subOne(borrowInfoData.getBookId());
         return flag;
     }
 

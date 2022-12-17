@@ -1,6 +1,6 @@
 spring:
   application:
-    name: book-service # 服务名称
+    name: borrowinfo-service # 服务名称
   profiles:
     active: dev #开发环境，这里是dev
   cloud:

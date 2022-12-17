@@ -10,4 +10,6 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface BorrowInfoMapper extends BaseMapper<BorrowInfo> {
     Boolean canBorrow(@Param("bookId") Integer bookId);
+
+    boolean subOne(Integer bookId);
 }

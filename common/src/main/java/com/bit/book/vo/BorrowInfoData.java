@@ -10,5 +10,9 @@ import lombok.Data;
 public class BorrowInfoData {
     Integer bookId;
 
+    String bookName;
+
     Integer userId;
+
+    String userName;
 }

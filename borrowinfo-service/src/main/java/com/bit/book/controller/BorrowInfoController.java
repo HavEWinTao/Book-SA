@@ -58,9 +58,7 @@ public class BorrowInfoController {
     @PostMapping
     public ResultBody borrowBook(@RequestBody BorrowInfoData borrowInfo) {
         // UserUtils.checkPrivilege(Privilege.PRI_READ, "用户借书权限");
-        Integer userId = borrowInfo.getUserId();
-        Integer bookId = borrowInfo.getBookId();
-        boolean flag = borrowInfoService.borrowBook(bookId, userId);
+        boolean flag = borrowInfoService.borrowBook(borrowInfo);
         if (!flag) {
             throw new BasicException(400, "借书失败");
         }

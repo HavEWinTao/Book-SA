@@ -5,4 +5,8 @@
         select *
         from select_stock_func(#{bookId});
     </select>
+
+    <update id="subOne">
+        update book set stock=stock-1 where book_id=#{bookId};
+    </update>
 </mapper>

@@ -9,10 +9,10 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 @MapperScan(basePackages = "com.bit.book.mapper")
 @SpringBootApplication
-public class BookApplication {
+public class OtherApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(BookApplication.class, args);
+        SpringApplication.run(OtherApplication.class, args);
     }
 
 }

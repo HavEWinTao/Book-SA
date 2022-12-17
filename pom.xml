@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
@@ -18,6 +19,9 @@
         <module>bookdetail-service</module>
         <module>other-service</module>
         <module>common</module>
+        <module>borrowinfo-service</module>
+        <module>feign-api</module>
+        <module>gateway</module>
     </modules>
 
     <packaging>pom</packaging>
@@ -29,7 +33,7 @@
         <velocity.version>2.3</velocity.version>
         <hutool.version>5.7.13</hutool.version>
         <java.version>1.8</java.version>
-        <spring-cloud.version>Hoxton.SR9</spring-cloud.version>
+        <spring-cloud.version>Hoxton.SR10</spring-cloud.version>
     </properties>
 
     <dependencyManagement>

@@ -16,6 +16,7 @@ public class AuthorizeFilter implements GlobalFilter, Ordered {
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain){
         // 1.获取请求参数
         ServerHttpRequest request = (ServerHttpRequest) exchange.getRequest();
+
         MultiValueMap<String, String> params = ((org.springframework.http.server.reactive.ServerHttpRequest) request).getQueryParams();
         // 2.获取参数中的authorization参数
         String auth = params.getFirst("authorization");

@@ -2,8 +2,7 @@ spring:
   #  配置数据源
   datasource:
     driver-class-name: org.postgresql.Driver
-    # url: jdbc:postgresql://123.249.84.58:26000/book?currentSchema=book
-    url: jdbc:postgresql://192.168.231.131:26000/book?currentSchema=book
+    url: jdbc:postgresql://120.46.153.45:26000/book?currentSchema=book
     username: fan
     password: SIsi04200521
   # 设置文件上传大小

@@ -22,6 +22,7 @@
         <module>feign-api</module>
         <module>gateway</module>
         <module>other-service</module>
+        <module>user-service</module>
     </modules>
 
     <packaging>pom</packaging>

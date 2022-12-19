@@ -4,7 +4,6 @@ import com.bit.book.entity.Privilege;
 import com.bit.book.entity.UserLog;
 import com.bit.book.service.UserLogService;
 import com.bit.book.utils.ResultBody;
-import com.bit.book.utils.UserUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,7 +23,7 @@ public class UserLogController {
 
     @GetMapping("/list")
     public ResultBody list(HttpSession session) {
-        UserUtils.checkPrivilege(Privilege.PRI_READ, "用户无权限查看数据");
+        //UserUtils.checkPrivilege(Privilege.PRI_READ, "用户无权限查看数据");
         List<UserLog> list = userLogService.list();
         return ResultBody.success(list.stream().sorted((o1, o2) -> (int) (o2.getActionTime().getTime() - o1.getActionTime().getTime())).collect(Collectors.toList()));
     }
@@ -32,7 +31,7 @@ public class UserLogController {
     //指定删除
     @DeleteMapping("/list/delete/{logId}")
     public ResultBody delete(@PathVariable("logId") Integer logId, HttpSession session) {
-        UserUtils.checkPrivilege(Privilege.PRI_EDIT, "用户无权限删除数据");
+        //UserUtils.checkPrivilege(Privilege.PRI_EDIT, "用户无权限删除数据");
         userLogService.deleteLogInfo(logId);
         return ResultBody.success("删除成功");
     }
@@ -41,7 +40,7 @@ public class UserLogController {
     @GetMapping("/listByPage")
     public ResultBody listByPage(HttpSession session, @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                                  @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize) {
-        UserUtils.checkPrivilege(Privilege.PRI_READ, "用户无权限查看数据");
+        //UserUtils.checkPrivilege(Privilege.PRI_READ, "用户无权限查看数据");
         return userLogService.listByPage(pageNum, pageSize);
     }
 }

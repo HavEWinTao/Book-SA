@@ -1,12 +1,9 @@
 package com.bit.book.controller;
 
 import com.bit.book.entity.BorrowInfo;
-import com.bit.book.entity.Privilege;
-import com.bit.book.entity.UserStatus;
 import com.bit.book.exception.BasicException;
 import com.bit.book.service.BorrowInfoService;
 import com.bit.book.utils.ResultBody;
-import com.bit.book.utils.UserUtils;
 import com.bit.book.vo.BorrowInfoData;
 import com.bit.book.vo.BorrowInfoSearchData;
 import com.bit.book.vo.PageRspData;

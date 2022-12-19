@@ -58,9 +58,7 @@ public class UserUtils {
         throw new BasicException(HttpStatus.FORBIDDEN.value(), msg);
     }
 
-    /**
-     *     提供两个重载，可以自由地或者清晰地设定日志记录中的描述内容
-     */
+    // 提供两个重载，可以自由地或者清晰地设定日志记录中的描述内容
     public static void log(HttpSession session, ActionType actionType, String description) {
         if (!isLoggedIn(session)) {
             throw new BasicException(HttpStatus.FORBIDDEN.value(), "用户未登录，无法记录日志");

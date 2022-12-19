@@ -1,11 +1,9 @@
 package com.bit.book.controller;
 
 import com.bit.book.entity.BookDetail;
-import com.bit.book.entity.Privilege;
 import com.bit.book.exception.BasicException;
 import com.bit.book.service.BookDetailService;
 import com.bit.book.utils.ResultBody;
-import com.bit.book.utils.UserUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;

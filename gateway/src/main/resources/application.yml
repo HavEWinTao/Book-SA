@@ -1,29 +1,57 @@
 server:
   port: 10010
-logging:
-  level:
-    cn.itcast: debug
-  pattern:
-    dateformat: MM-dd HH:mm:ss:SSS
 spring:
   application:
     name: gateway
+  #  配置数据源
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://192.168.231.131:26000/book?currentSchema=book
+    username: fan
+    password: SIsi04200521
   cloud:
     nacos:
       server-addr: 43.138.10.134:8848 # nacos地址
     gateway:
       routes:
-        - id: bookdetail-service # 路由标示，必须唯一
-          uri: lb://bookdetailservice # 路由的目标地址
-          predicates: # 路由断言，判断请求是否符合规则
-            - Path=/detail/** # 路径断言，判断路径是否是以/user开头，如果是则符合
+        - id: bookdetail-service
+          uri: lb://bookdetail-service
+          predicates:
+            - Path=/detail/**
+
+        - id: book-service
+          uri: lb://book-service
+          predicates:
+            - Path=/book/**
+
         - id: borrowinfo-service
-          uri: lb://borrrowinfoservice
+          uri: lb://borrrowinfo-service
           predicates:
             - Path=/borrow/**
+
         - id: other-service
-          uri: lb://otherservice
+          uri: lb://other-service
           predicates:
             - Path=/other/**
+      globalcors: # 全局的跨域处理
+        add-to-simple-url-handler-mapping: true # 解决options请求被拦截问题
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: # 允许哪些网站的跨域请求
+              - "http://192.168.1.127:5500"
+            allowedMethods: # 允许的跨域ajax的请求方式
+              - "GET"
+              - "POST"
+              - "DELETE"
+              - "PUT"
+              - "OPTIONS"
+            allowedHeaders: "*" # 允许在请求中携带的头信息
+            allowCredentials: true # 是否允许携带cookie
+            maxAge: 360000 # 这次跨域检测的有效期
       default-filters:
-        - AddRequestHeader=Truth, book is freaking awesome!
+        - AddRequestHeader=origin, gateway #添加名为origin的请求头，值为gateway
+logging:
+  level:
+    com.bit.book: debug
+  pattern:
+    dateformat: MM-dd HH:mm:ss:SSS

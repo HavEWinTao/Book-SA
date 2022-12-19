@@ -36,7 +36,7 @@ public class BookDetailController {
      */
     @PutMapping
     public ResultBody addDetail(@RequestBody BookDetail reqData) {
-        UserUtils.checkPrivilege(Privilege.PRI_EDIT, "用户无权限修改数据");
+        //UserUtils.checkPrivilege(Privilege.PRI_EDIT, "用户无权限修改数据");
         boolean flag = bookDetailService.add(reqData);
         if (!flag) {
             throw new BasicException(400, "增加失败");
@@ -49,7 +49,7 @@ public class BookDetailController {
      */
     @DeleteMapping("/{id}")
     public ResultBody deleteDetail(@PathVariable("id") Integer id) {
-        UserUtils.checkPrivilege(Privilege.PRI_EDIT, "用户无权限修改数据");
+        //UserUtils.checkPrivilege(Privilege.PRI_EDIT, "用户无权限修改数据");
         boolean flag = bookDetailService.removeById(id);
         if (!flag) {
             throw new BasicException(400, "删除失败");
@@ -62,7 +62,7 @@ public class BookDetailController {
      */
     @PostMapping
     public ResultBody editDetail(@Validated @RequestBody BookDetail reqData) {
-        UserUtils.checkPrivilege(Privilege.PRI_EDIT, "用户无权修改数据");
+        //UserUtils.checkPrivilege(Privilege.PRI_EDIT, "用户无权修改数据");
         boolean flag = bookDetailService.updateBookDetail(reqData);
         if (!flag) {
             throw new BasicException(400, "修改失败");
@@ -76,7 +76,7 @@ public class BookDetailController {
     @PostMapping("/upload")
     public ResultBody upload(@RequestPart MultipartFile file, @RequestParam("path") String path,
                              @RequestParam("id") Integer id, @RequestParam("image") String image) {
-        UserUtils.checkPrivilege(Privilege.PRI_EDIT, "用户无权限修改数据");
+        //UserUtils.checkPrivilege(Privilege.PRI_EDIT, "用户无权限修改数据");
         bookDetailService.deleteImage(image);
         String fullPath = bookDetailService.upload(file, path, id);
         return ResultBody.success("ok", fullPath);

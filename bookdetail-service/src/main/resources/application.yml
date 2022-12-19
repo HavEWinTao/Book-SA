@@ -30,4 +30,4 @@ mybatis-plus:
 # 日志级别
 logging:
   level:
-    cn.edu.bit.dnd.mapper: warn
+    com.bit.book.mapper: warn

@@ -9,7 +9,7 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>bookdetail-service</artifactId>
+    <artifactId>user-service</artifactId>
 
     <dependencies>
         <!-- nacos客户端依赖包 -->
@@ -39,7 +39,7 @@
     </dependencies>
 
     <build>
-        <finalName>bookdetail-service</finalName>
+        <finalName>user-service</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

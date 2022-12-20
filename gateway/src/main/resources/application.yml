@@ -43,7 +43,7 @@ spring:
         corsConfigurations:
           '[/**]':
             allowedOrigins: # 允许哪些网站的跨域请求
-              - "http://192.168.1.127:5500"
+              - "http://81.70.158.95:8080"
             allowedMethods: # 允许的跨域ajax的请求方式
               - "GET"
               - "POST"

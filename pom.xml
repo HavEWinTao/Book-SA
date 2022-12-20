@@ -85,6 +85,7 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
+            <version>1.18.20</version>
         </dependency>
 
         <!--mybatis plus-->
@@ -112,7 +113,7 @@
             <version>${hutool.version}</version>
         </dependency>
     </dependencies>
-
+<!--
     <build>
         <finalName>book</finalName>
         <plugins>
@@ -122,5 +123,5 @@
             </plugin>
         </plugins>
     </build>
-
+-->
 </project>

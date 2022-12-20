@@ -18,8 +18,8 @@ spring:
           enabled: true
           lower-case-service-id: true
       routes:
-        - id: bookdetail-service
-          uri: lb://bookdetail-service
+        - id: bookdetailservice
+          uri: lb://bookdetailservice
           predicates:
             - Path=/detail/**
 
@@ -28,15 +28,16 @@ spring:
           predicates:
             - Path=/book/**
 
-        - id: borrowinfo-service
-          uri: lb://borrrowinfo-service
+        - id: borrowservice
+          uri: lb://borrrowservice
           predicates:
             - Path=/borrow/**
 
-        - id: user-service
-          uri: lb://user-service
+        - id: userservice
+          uri: lb://userservice
           predicates:
             - Path=/user/**
+
       globalcors: # 全局的跨域处理
         add-to-simple-url-handler-mapping: true # 解决options请求被拦截问题
         corsConfigurations:

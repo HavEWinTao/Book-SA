@@ -31,14 +31,14 @@ spring:
 mybatis-plus:
   mapper-locations: classpath*:/mapper/**/*Mapper.xml
 
-bookservice: # 给某个微服务配置负载均衡规则，这里是userservice服务
+bookdetailservice: # 给某个微服务配置负载均衡规则
   ribbon:
     NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RoundRobinRule # 负载均衡规则
 ribbon:
   eager-load:
     enabled: true
     clients:
-      - bookservice
+      - bookdetailservice
 
 # 日志级别
 logging:

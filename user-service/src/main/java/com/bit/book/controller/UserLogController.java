@@ -1,6 +1,5 @@
 package com.bit.book.controller;
 
-import com.bit.book.entity.Privilege;
 import com.bit.book.entity.UserLog;
 import com.bit.book.service.UserLogService;
 import com.bit.book.utils.ResultBody;
@@ -13,7 +12,7 @@ import java.util.stream.Collectors;
 
 
 @RestController
-@RequestMapping("/book/user/log")
+@RequestMapping("/user/log")
 public class UserLogController {
 
     @Autowired

@@ -27,7 +27,7 @@ import static com.bit.book.utils.UserUtils.sessionStatusKey;
  * 2022/10/13 21:42
  */
 @RestController
-@RequestMapping("/book/user")
+@RequestMapping("/user")
 public class UserController {
     @Autowired
     UserService service;
@@ -101,7 +101,7 @@ public class UserController {
 
     @GetMapping("/list")
     public ResultBody list(HttpSession session) {
-        UserUtils.checkPrivilege(Privilege.PRI_EDIT, "用户无权限进行用户管理操作");
+        //UserUtils.checkPrivilege(Privilege.PRI_EDIT, "用户无权限进行用户管理操作");
         return ResultBody.success(service.getList());
     }
 

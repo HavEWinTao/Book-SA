@@ -29,7 +29,7 @@ spring:
             - Path=/book/**
 
         - id: borrowservice
-          uri: lb://borrrowservice
+          uri: lb://borrowservice
           predicates:
             - Path=/borrow/**
 

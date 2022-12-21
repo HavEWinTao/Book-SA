@@ -59,7 +59,7 @@ spring:
             allowCredentials: true # 是否允许携带cookie
             maxAge: 360000 # 这次跨域检测的有效期
       default-filters:
-        - AddRequestHeader=origin, gateway #添加名为origin的请求头，值为gateway
+        - AddRequestHeader=Origin, gateway #添加名为origin的请求头，值为gateway
 logging:
   level:
     com.bit.book: debug

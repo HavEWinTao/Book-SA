@@ -43,4 +43,4 @@ ribbon:
 # 日志级别
 logging:
   level:
-    com.bit.bit.mapper: info
+    com.bit.book.mapper: info

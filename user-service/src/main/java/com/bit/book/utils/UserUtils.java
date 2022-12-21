@@ -32,6 +32,7 @@ public class UserUtils {
     public void setUserLogService(UserLogService service) {
         userLogService = service;
     }
+
     @Autowired
     public void setHttpSession(HttpSession session) {
         httpSession = session;
@@ -40,12 +41,14 @@ public class UserUtils {
     public static boolean isLoggedIn(HttpSession session) {
         return session.getAttribute(sessionStatusKey) != null;
     }
-    public static boolean isLoggedIn() {
+
+    public static boolean isLoggedIn()  {
         return httpSession.getAttribute(sessionStatusKey) != null;
     }
 
     /**
      * 检查用户是否具有某项权限。
+     *
      * @throws BasicException 当用户不具有指定权限时抛出。如果用户具有指定权限，此函数正常返回。
      */
     public static void checkPrivilege(int privilegeId, String msg) {
@@ -74,9 +77,5 @@ public class UserUtils {
         log.setActionType(actionType.value());
         log.setDescription(description);
         userLogService.save(log);
-    }
-
-    public static void log(HttpSession session, ActionType actionType, String tableName, String rowName) {
-        log(session, actionType, "【" + tableName + "】表中的【" + rowName + "】");
     }
 }

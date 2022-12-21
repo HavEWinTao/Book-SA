@@ -64,7 +64,7 @@ public class UploadUtils {
                 filePath = pathPrefix + CommonUtils.timeToStr() + "_" + fileName;
                 dest = new File(CLASS_PATH_PREFIX + filePath);
             }
-            file.transferTo(dest);
+            file.transferTo(dest.getAbsoluteFile());
         } catch (IOException e) {
             e.printStackTrace();
             throw new BasicException(-1,e.getMessage());

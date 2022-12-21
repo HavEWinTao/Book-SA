@@ -26,6 +26,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     //添加静态资源映射
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/static/**/*.png", "/static/**/*.jpg", "static/**/*.mp4").addResourceLocations("classpath:/static/");
+        registry.addResourceHandler("/static/**")
+                .addResourceLocations("classpath:/static/", "file:static/");
     }
 }

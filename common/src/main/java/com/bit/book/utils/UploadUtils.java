@@ -1,6 +1,8 @@
 package com.bit.book.utils;
 
 import com.bit.book.exception.BasicException;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,16 +19,17 @@ public class UploadUtils {
 
     private static final String FILE_TYPE_IMG = "img";
 
-    private static final String FILE_TYPE_VIDEO = "video";
-
     private static final String CLASS_PATH_PREFIX;
 
     static {
+        String CLASS_PATH_PREFIX1;
         try {
-            CLASS_PATH_PREFIX = ResourceUtils.getURL("classpath:").getPath();
-        } catch (FileNotFoundException e) {
-            throw new BasicException(500, "文件上传失败！");
+            Resource resource = new ClassPathResource("");
+            CLASS_PATH_PREFIX1 = resource.getFile().getAbsolutePath() + "/";
+        } catch (IOException e) {
+            CLASS_PATH_PREFIX1 = "./";
         }
+        CLASS_PATH_PREFIX = CLASS_PATH_PREFIX1;
     }
 
 
@@ -38,14 +41,6 @@ public class UploadUtils {
     }
 
     /**
-     * 视频上传，返回 classpath下的路径 如： /static/video/db1/xxx/20211003_xxxx.mp4
-     */
-    public static String uploadVideo(MultipartFile file, String path) {
-        return upload(file, FILE_TYPE_VIDEO, path);
-    }
-
-
-    /**
      * 文件上传
      */
     private static String upload(MultipartFile file, String fileType, String path) {
@@ -53,8 +48,6 @@ public class UploadUtils {
         String pathPrefix, filePath;
         if (fileType.equals(FILE_TYPE_IMG)) {
             pathPrefix = "static/img";
-        } else if (fileType.equals(FILE_TYPE_VIDEO)) {
-            pathPrefix = "static/video";
         } else {
             pathPrefix = "static/other";
         }
@@ -74,7 +67,8 @@ public class UploadUtils {
             file.transferTo(dest);
         } catch (IOException e) {
             e.printStackTrace();
-            throw new BasicException(HttpStatus.INTERNAL_SERVER_ERROR.value(), "文件上传失败！");
+            throw new BasicException(-1,e.getMessage());
+            //throw new BasicException(HttpStatus.INTERNAL_SERVER_ERROR.value(), "文件上传失败！");
         }
         return "/" + filePath;
     }

@@ -30,7 +30,7 @@ import static com.bit.book.utils.UserUtils.sessionStatusKey;
 @RequestMapping("/user")
 public class UserController {
     @Autowired
-    UserService service;
+    UserService userService;
     @Autowired
     UsersRoleService usersRoleService;
     @Autowired
@@ -43,7 +43,7 @@ public class UserController {
         if (UserUtils.isLoggedIn(session)) {
             return ResultBody.success("已登录！", session.getAttribute(sessionStatusKey));
         }
-        User user = service.getOne(Wrappers.<User>lambdaQuery().eq(User::getUserName, vo.getUsername()));
+        User user = userService.getOne(Wrappers.<User>lambdaQuery().eq(User::getUserName, vo.getUsername()));
         if (user == null) {
             return ResultBody.error(HttpStatus.BAD_REQUEST.value(), "用户名或密码错误");
         }
@@ -95,20 +95,20 @@ public class UserController {
         if (!status.getUserName().equals(vo.getUsername())) {
             return ResultBody.error(HttpStatus.BAD_REQUEST.value(), "只允许用户修改自己的密码");
         }
-        service.manage(status.getUserId(), vo.getPassword());
+        userService.manage(status.getUserId(), vo.getPassword());
         return ResultBody.success("成功");
     }
 
     @GetMapping("/list")
     public ResultBody list(HttpSession session) {
         //UserUtils.checkPrivilege(Privilege.PRI_EDIT, "用户无权限进行用户管理操作");
-        return ResultBody.success(service.getList());
+        return ResultBody.success(userService.getList());
     }
 
     @PostMapping("/register")
     public ResultBody register(@RequestBody UserReqData vo, HttpSession session) {
         UserUtils.checkPrivilege(Privilege.PRI_EDIT, "用户无权限进行用户管理操作");
-        service.register(vo);
+        userService.register(vo);
         UserUtils.log(session, ActionType.INSERT, "新用户：" + vo.getUsername());
         return ResultBody.success("成功");
     }
@@ -120,7 +120,7 @@ public class UserController {
         if (status.getUserId().equals(id)) {
             return ResultBody.error(HttpStatus.FORBIDDEN.value(), "不能删除自己的账号");
         }
-        String userName = service.deleteRelated(id);
+        String userName = userService.deleteRelated(id);
         UserUtils.log(session, ActionType.DELETE, "用户：" + userName);
         return ResultBody.success("成功");
     }

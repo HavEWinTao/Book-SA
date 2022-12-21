@@ -39,7 +39,11 @@ ribbon:
     enabled: true
     clients:
       - userservice
-
+  redis:
+    host: 81.70.158.95
+    port: 6379
+    password: 123456
+    database: 0
 # 日志级别
 logging:
   level:

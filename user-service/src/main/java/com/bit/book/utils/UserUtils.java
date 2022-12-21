@@ -52,7 +52,9 @@ public class UserUtils {
      * @throws BasicException 当用户不具有指定权限时抛出。如果用户具有指定权限，此函数正常返回。
      */
     public static void checkPrivilege(int privilegeId, String msg) {
-        if (!isLoggedIn()) throw new BasicException(HttpStatus.UNAUTHORIZED.value(), "登录超时，请重新登录");
+        if (!isLoggedIn()) {
+            throw new BasicException(HttpStatus.UNAUTHORIZED.value(), "登录超时，请重新登录");
+        }
         UserStatus status = (UserStatus) httpSession.getAttribute(sessionStatusKey);
         for (Privilege privilege : status.getPrivileges()) {
             if (privilege.getPrivilegeId() != privilegeId) continue;

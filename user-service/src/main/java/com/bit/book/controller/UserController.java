@@ -107,7 +107,7 @@ public class UserController {
 
     @PostMapping("/register")
     public ResultBody register(@RequestBody UserReqData vo, HttpSession session) {
-        UserUtils.checkPrivilege(Privilege.PRI_EDIT, "用户无权限进行用户管理操作");
+        //UserUtils.checkPrivilege(Privilege.PRI_EDIT, "用户无权限进行用户管理操作");
         userService.register(vo);
         UserUtils.log(session, ActionType.INSERT, "新用户：" + vo.getUsername());
         return ResultBody.success("成功");
@@ -115,7 +115,7 @@ public class UserController {
 
     @DeleteMapping("/{id}")
     public ResultBody delete(@PathVariable("id") Integer id, HttpSession session) {
-        UserUtils.checkPrivilege(Privilege.PRI_EDIT, "用户无权限进行用户管理操作");
+        //UserUtils.checkPrivilege(Privilege.PRI_EDIT, "用户无权限进行用户管理操作");
         UserStatus status = (UserStatus) session.getAttribute(sessionStatusKey);
         if (status.getUserId().equals(id)) {
             return ResultBody.error(HttpStatus.FORBIDDEN.value(), "不能删除自己的账号");

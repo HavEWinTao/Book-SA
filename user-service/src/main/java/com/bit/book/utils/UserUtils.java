@@ -6,6 +6,7 @@ import com.bit.book.entity.UserStatus;
 import com.bit.book.service.UserLogService;
 import com.bit.book.enums.ActionType;
 import com.bit.book.exception.BasicException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
@@ -23,8 +24,12 @@ public class UserUtils {
     public static final String sessionStatusKey = "userStatus";
     private static final Pattern roleNamePattern = Pattern.compile("（.+）$");
 
-    @Resource
     private static UserLogService userLogService;
+
+    @Autowired
+    public void setUserLogService(UserLogService service) {
+        userLogService = service;
+    }
 
     public static boolean isLoggedIn(HttpSession session) {
         return session.getAttribute(sessionStatusKey) != null;

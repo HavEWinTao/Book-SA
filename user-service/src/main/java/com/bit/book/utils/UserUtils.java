@@ -6,10 +6,10 @@ import com.bit.book.entity.UserStatus;
 import com.bit.book.service.UserLogService;
 import com.bit.book.enums.ActionType;
 import com.bit.book.exception.BasicException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.regex.*;
@@ -23,27 +23,11 @@ public class UserUtils {
     public static final String sessionStatusKey = "userStatus";
     private static final Pattern roleNamePattern = Pattern.compile("（.+）$");
 
-    // 211123：在 UserUtils 自动获取 session，不需要从 Controller 传递过来
-    private static HttpSession httpSession;
-    // 虽然 UserUtils 不是 Controller，但是可以这样调用 Service
+    @Resource
     private static UserLogService userLogService;
-
-    @Autowired
-    public void setUserLogService(UserLogService service) {
-        userLogService = service;
-    }
-
-    @Autowired
-    public void setHttpSession(HttpSession session) {
-        httpSession = session;
-    }
 
     public static boolean isLoggedIn(HttpSession session) {
         return session.getAttribute(sessionStatusKey) != null;
-    }
-
-    public static boolean isLoggedIn()  {
-        return httpSession.getAttribute(sessionStatusKey) != null;
     }
 
     /**
@@ -51,11 +35,11 @@ public class UserUtils {
      *
      * @throws BasicException 当用户不具有指定权限时抛出。如果用户具有指定权限，此函数正常返回。
      */
-    public static void checkPrivilege(int privilegeId, String msg) {
-        if (!isLoggedIn()) {
+    public static void checkPrivilege(HttpSession session, int privilegeId, String msg) {
+        if (!isLoggedIn(session)) {
             throw new BasicException(HttpStatus.UNAUTHORIZED.value(), "登录超时，请重新登录");
         }
-        UserStatus status = (UserStatus) httpSession.getAttribute(sessionStatusKey);
+        UserStatus status = (UserStatus) session.getAttribute(sessionStatusKey);
         for (Privilege privilege : status.getPrivileges()) {
             if (privilege.getPrivilegeId() != privilegeId) continue;
             return;
